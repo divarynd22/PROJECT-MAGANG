@@ -1390,13 +1390,6 @@ async function startInlineScanner() {
     // ── Setup ZXing reader – semua format ──
     const hints = new Map();
 
-    hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [
-    ZXing.BarcodeFormat.EAN_13,
-    ZXing.BarcodeFormat.CODE_128,
-    ZXing.BarcodeFormat.CODE_39,
-    ZXing.BarcodeFormat.QR_CODE
-  ]);
-    
     
     if (window.ZXingBrowser) {
       // Decode loop pakai ZXingBrowser
