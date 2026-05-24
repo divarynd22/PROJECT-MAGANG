@@ -1376,8 +1376,8 @@ async function startInlineScanner() {
 
     // ── Buka stream kamera ──
     const constraints = _currentDevId
-      ? { video: { deviceId: { exact: _currentDevId }, width: { ideal: 1280 }, height: { ideal: 720 } } }
-      : { video: { facingMode: _facingMode, width: { ideal: 1280 }, height: { ideal: 720 } } };
+      ? { video: { deviceId: { exact: _currentDevId }, width: { ideal: 1920 }, height: { ideal: 1080 } } }
+      : { video: { facingMode: _facingMode, width: { ideal: 1920 }, height: { ideal: 1080 } } };
 
     _scanStream = await navigator.mediaDevices.getUserMedia(constraints);
     video.srcObject = _scanStream;
@@ -1389,6 +1389,15 @@ async function startInlineScanner() {
 
     // ── Setup ZXing reader – semua format ──
     const hints = new Map();
+
+    hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [
+    ZXing.BarcodeFormat.EAN_13,
+    ZXing.BarcodeFormat.CODE_128,
+    ZXing.BarcodeFormat.CODE_39,
+    ZXing.BarcodeFormat.QR_CODE
+  ]);
+    
+    
     if (window.ZXingBrowser) {
       // Decode loop pakai ZXingBrowser
       _zxingReader = new ZXingBrowser.BrowserMultiFormatReader(hints);
